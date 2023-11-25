@@ -17,10 +17,13 @@ namespace BillTask.main.template
         protected List<Bill> Bills { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            //load data from database when load the page
             LoadAllBills();
 
         }
 
+
+        //take bill data and save in database
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -69,6 +72,8 @@ namespace BillTask.main.template
             LoadAllBills();
         }
 
+
+        //get value of each control to save it in database
         private T FindControl<T>(Control container) where T : Control
         {
             foreach (Control control in container.Controls)
@@ -91,6 +96,8 @@ namespace BillTask.main.template
         }
 
 
+
+        //display all data from database
         private void LoadAllBills()
         {
             Bills = new List<Bill>();
@@ -122,18 +129,5 @@ namespace BillTask.main.template
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 

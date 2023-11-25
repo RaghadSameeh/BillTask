@@ -1,21 +1,22 @@
 ﻿function TotalPrice(id) {
+    //get inputs values to get the total for each item
     var input1 = document.querySelector(".quantity" + id);
     var input2 = document.querySelector(".unitPrice" + id);
     var result = document.querySelector(".result" + id);
-
     result.innerHTML = Number(input1.value) * Number(input2.value);
     updateTotal();
 }
 
 function updateTotal() {
+    //get price of all elements
     var result1 = Number(document.querySelector(".result1").innerHTML);
     var result2 = Number(document.querySelector(".result2").innerHTML);
     var result3 = Number(document.querySelector(".result3").innerHTML);
 
+    //get the total price
     var total = result1 + result2 + result3;
     document.getElementById('total').innerHTML = total.toFixed(2);
 }
-
 
 function deleteSelectedRows() {
     var checkboxes = document.getElementsByClassName('deleteCheckbox');
