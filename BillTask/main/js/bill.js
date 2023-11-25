@@ -15,3 +15,24 @@ function updateTotal() {
     var total = result1 + result2 + result3;
     document.getElementById('total').innerHTML = total.toFixed(2);
 }
+
+
+function deleteSelectedRows() {
+    var checkboxes = document.getElementsByClassName('deleteCheckbox');
+    var table = document.getElementsByClassName('displayTable')[0];
+    var rowsToDelete = [];
+
+    // Convert the collection to an array and use forEach
+    Array.from(checkboxes).forEach(function (chkDelete, index) {
+        if (chkDelete.checked) {
+            // If the checkbox is checked, add the row index to the array
+            rowsToDelete.push(index);
+        }
+    });
+
+    // Loop through the array of row indices to delete
+    for (var j = 0; j < rowsToDelete.length; j++) {
+        // Remove the row from the client-side table
+        table.deleteRow(rowsToDelete[j]);
+    }
+}

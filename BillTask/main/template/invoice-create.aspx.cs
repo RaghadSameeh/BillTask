@@ -7,14 +7,17 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
+using BillTask.Models;
 
 namespace BillTask.main.template
 {
     public partial class invoice_create : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        protected List<Bill> Bills { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadAllBills();
 
         }
 
@@ -40,7 +43,10 @@ namespace BillTask.main.template
                         string itemName = row.Cells[1].InnerText;
                         int quantity = Convert.ToInt32(quantityTextBox.Text);
                         decimal unitPrice = Convert.ToDecimal(unitPriceTextBox.Text);
-                        decimal total = Convert.ToDecimal(resultLabel.Text);
+                        decimal total = quantity * unitPrice;
+
+                        // Now you have the calculated total
+                        resultLabel.Text = total.ToString();
 
                         // Now you have the values from each row
                         // You can use these values to insert into the database or perform other operations
@@ -59,6 +65,8 @@ namespace BillTask.main.template
                     }
                 }
             }
+
+            LoadAllBills();
         }
 
         private T FindControl<T>(Control container) where T : Control
@@ -83,14 +91,49 @@ namespace BillTask.main.template
         }
 
 
+        private void LoadAllBills()
+        {
+            Bills = new List<Bill>();
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
 
+                using (SqlCommand command = new SqlCommand("SELECT ItemName, Quantity, UnitPrice, Total from Bill", connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Bill bill = new Bill
+                            {
+                                ItemName = reader["ItemName"].ToString(),
+                                Quantity = Convert.ToInt32(reader["Quantity"]),
+                                UnitPrice = Convert.ToDecimal(reader["UnitPrice"]),
+                                Total = Convert.ToDecimal(reader["Total"])
+                            };
 
-
-
-
-
-
-
+                            Bills.Add(bill);
+                        }
+                        rptBills.DataSource = Bills;
+                        rptBills.DataBind();
+                    }
+                }
+            }
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+

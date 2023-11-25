@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -771,7 +772,6 @@
                                     <div class="col-lg-12">
                                             <asp:Button ID="btnSubmit" runat="server" Text="Save bill in DB" OnClick="btnSubmit_Click" class="btn btn-primary btn-sl-lg mr-3"/>
 
-                                            <button class="btn btn-info  ">Delete selected rows</button>
                                            
                                     </div>
                                 </div>
@@ -842,6 +842,49 @@
                                             </table>
                                         </div>
                                     </div>
+
+
+       <!--**********************************
+           start display table
+        ***********************************-->
+       <div class="col-lg-12">
+       <h1>Display Bills</h1>
+<asp:Button ID="Button2" runat="server" Text="Delete selected row" OnClientClick="deleteSelectedRows(); return false;" UseSubmitBehavior="false" class="btn btn-primary btn-sl-lg mx-5 px-2" />       <div class="create-invoice-table table-responsive">
+       <asp:Repeater ID="rptBills" runat="server">
+        <HeaderTemplate>
+            <table  class="table invoice-details-table displayTable" style="min-width: 620px;">
+                <thead>
+                    <tr>
+                        <th>Delete</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+        </HeaderTemplate>
+        <ItemTemplate>
+            <tr>
+                <td><input type="checkbox" class="deleteCheckbox" /></td>
+                <td><%# Eval("ItemName") %></td>
+                <td><%# Eval("Quantity") %></td>
+                <td><%# Eval("UnitPrice") %></td>
+                <td><%# Eval("Total") %></td>
+            </tr>
+        </ItemTemplate>
+        <FooterTemplate>
+                </tbody>
+            </table>
+        </FooterTemplate>
+    </asp:Repeater>
+   </div>
+  </div>
+
+ <!--**********************************
+           end display table
+        ***********************************-->
+
                                 </div>
                             </div>
                         </div>
@@ -853,6 +896,11 @@
         <!--**********************************
             Content body end
         ***********************************-->
+        
+ 
+           
+        
+
         
         
         <!--**********************************
@@ -1440,6 +1488,7 @@
     <script src="../js/gleek.js"></script>
     <script src="../js/styleSwitcher.js"></script>
         <script src="../js/bill.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </form>
 </body>
 </html>
