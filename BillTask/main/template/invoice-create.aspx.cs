@@ -26,36 +26,23 @@ namespace BillTask.main.template
         //take bill data and save in database
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            decimal sum = 0;
+            for (int i = 1; i <= Request.Form.Count; i++)
             {
-                connection.Open();
-
-                foreach (HtmlTableRow row in myTable.Rows)
+                string itemName = Request.Form["itemName" + i];
+                if (itemName == null)
+                    break;
+                else
                 {
-                    // Skip the header row
-                    if (row.Cells[0].Controls.Count > 0 && row.Cells[0].Controls[0] is CheckBox)
-                        continue;
+                    int quantity = Convert.ToInt32(Request.Form["quantity" + i]);
+                    decimal unitPrice = Convert.ToDecimal(Request.Form["unitPrice" + i]);
+                    decimal total = quantity * unitPrice;
+                    sum += total;
 
-                    // Assuming the structure is consistent (checkbox, textbox, textbox, label)
-                    TextBox quantityTextBox = FindControl<TextBox>(row.Cells[2]);
-                    TextBox unitPriceTextBox = FindControl<TextBox>(row.Cells[3]);
-                    Label resultLabel = FindControl<Label>(row.Cells[4]);
 
-                    if (quantityTextBox != null && unitPriceTextBox != null && resultLabel != null)
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        string itemName = row.Cells[1].InnerText;
-                        int quantity = Convert.ToInt32(quantityTextBox.Text);
-                        decimal unitPrice = Convert.ToDecimal(unitPriceTextBox.Text);
-                        decimal total = quantity * unitPrice;
-
-                        // Now you have the calculated total
-                        resultLabel.Text = total.ToString();
-
-                        // Now you have the values from each row
-                        // You can use these values to insert into the database or perform other operations
-                        // ...
-
-                        // For example, you can use SqlCommand to insert into the database
+                        connection.Open();
                         using (SqlCommand command = new SqlCommand("INSERT INTO Bill (ItemName, Quantity, UnitPrice, Total) VALUES (@ItemName, @Quantity, @UnitPrice, @Total)", connection))
                         {
                             command.Parameters.AddWithValue("@ItemName", itemName);
@@ -66,7 +53,9 @@ namespace BillTask.main.template
                             command.ExecuteNonQuery();
                         }
                     }
+
                 }
+               
             }
 
             LoadAllBills();

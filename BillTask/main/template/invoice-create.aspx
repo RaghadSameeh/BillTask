@@ -13,9 +13,11 @@
     <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 <body>
     <form id="form1" runat="server">
+
     <!--*******************
         Preloader start
     ********************-->
@@ -770,76 +772,72 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                            <asp:Button ID="btnSubmit" runat="server" Text="Save bill in DB" OnClick="btnSubmit_Click" class="btn btn-primary btn-sl-lg mr-3"/>
-
-                                           
+                                            <asp:Button ID="btnSubmit" runat="server" Text="Save bill in DB" OnClick="btnSubmit_Click" class="btn btn-primary btn-sl-lg mr-3"/>   
                                     </div>
                                 </div>
-                     
-                                 
-                                 
+    <div class="row mt-5">
+    <div class="col-lg-12">
+    <div class="create-invoice-table table-responsive">
+    <table id="myTable" class="table invoice-details-table" style="min-width: 620px;">
+    <thead>
+        <tr>
+            <th>Manage</th>
+            <th>Items</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        <tr>
+            <td><input type="checkbox" /></td>
+<td class="muted-text">
+    <input name="itemName1" type="text" style="text-align:center;" value="item 1" readonly />
+</td>            <td class="muted-text">
+                <input type="text" style="text-align:center;" value="1" class="quantity1" name="quantity1" onInput="TotalPrice(1)" />
+            </td>
+            <td class="muted-text">
+                <input type="text" style="text-align:center;" value="1" class="unitPrice1" name="unitPrice1" onInput="TotalPrice(1)" />
+            </td>
+            <td class="text-primary"><span class="result1">0.00</span></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+<td class="muted-text">
+    <input name="itemName2" type="text" style="text-align:center;" value="item 2" readonly />
+</td>            <td class="muted-text">
+                <input type="text" style="text-align:center;" value="1" class="quantity2" name="quantity2" onInput="TotalPrice(2)" />
+            </td>
+            <td class="muted-text">
+                <input type="text" style="text-align:center;" value="1" class="unitPrice2" name="unitPrice2" onInput="TotalPrice(2)" />
+            </td>
+            <td class="text-primary"><span class="result2">0.00</span></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+<td class="muted-text">
+    <input name="itemName3" type="text" style="text-align:center;" value="item 3" readonly />
+</td>            <td class="muted-text">
+                <input type="text" style="text-align:center;" value="1" class="quantity3" name="quantity3" onInput="TotalPrice(3)" />
+            </td>
+            <td class="muted-text">
+                <input type="text" style="text-align:center;" value="1" class="unitPrice3" name="unitPrice3" onInput="TotalPrice(3)" />
+            </td>
+            <td class="text-primary"><span class="result3">0.00</span></td>
+        </tr>
+      <%--  <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Net</td>
+            <td class="text-primary"></td>
+        </tr>--%>
+    </tbody>
+</table>
+        <span id="total">0.000</span>
 
-                                <div class="row mt-5">
-                                    <div class="col-lg-12">
-                                        <div class="create-invoice-table table-responsive">
-                                            <table id="myTable" runat="server" class="table invoice-details-table" style="min-width: 620px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Manage</th>
-                                                        <th>Items</th>
-                                                       
-                                                        <th>Quantity</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><input type="checkbox"/></td>
-                                                        <td class="muted-text">item 1</td>
-                                                       
-                                                        <td class="muted-text">
-                                                            <asp:TextBox runat="server"  style="text-align:center;" value="1" type="text" class="quantity1" onInput="TotalPrice(1)"></asp:TextBox>
-                                                        </td>
-                                                        <td class="muted-text"><asp:TextBox runat="server" style="text-align:center;" value="1"  type="text" class="unitPrice1" onInput="TotalPrice(1)"></asp:TextBox></td>
-                                                        <td class="text-primary"><asp:Label runat="server" class="result1">0.00</asp:Label></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td class="muted-text">item 2</td>
-                                                       
-                                                
-                                                        <td class="muted-text">
-                                                            <asp:TextBox runat="server" style="text-align:center;" value="1" type="text" class="quantity2" onInput="TotalPrice(2)"></asp:TextBox>
-                                                        </td>
-                                                        <td class="muted-text"><asp:TextBox runat="server" style="text-align:center;" value="1" type="text" class="unitPrice2" onInput="TotalPrice(2)"></asp:TextBox></td>
-                                                        <td class="text-primary" ><asp:Label runat="server" class="result2">0.00</asp:Label></td>
-                                                    </tr>
-                             
+<button type="button" onclick="addRow()" class="btn btn-primary btn-sl-lg mx-5 px-2">Add Row</button>
 
-                                                       <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td class="muted-text">item 3</td>
-                                                       
-                                                
-                                                        <td class="muted-text">
-                                                            <asp:TextBox runat="server" style="text-align:center;" value="1" type="text" class="quantity3" onInput="TotalPrice(3)"></asp:TextBox>
-                                                        </td>
-                                                        <td class="muted-text"><asp:TextBox runat="server" style="text-align:center;" value="1" type="text" class="unitPrice3" onInput="TotalPrice(3)"></asp:TextBox></td>
-                                                        <td class="text-primary" ><asp:Label runat="server" class="result3">0.00</asp:Label></td>
-                                                    </tr>
-                                                     
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Net</td>
-                                                        <td class="text-primary"><asp:Label runat="server" id="total">0.000</asp:Label></td>
-                                                    </tr>
-                                                     
-                                                     
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
 
@@ -1482,13 +1480,33 @@
     <!--**********************************
         Scripts
     ***********************************-->
+        <script>
+
+            function addRow() {
+                var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+                var rowCount = table.getElementsByTagName('tr').length+1;
+
+                var newRow = table.insertRow();
+
+                newRow.innerHTML = '<td><input type="checkbox" /></td>' +
+                    '<td class="muted-text"><input name="itemName' + rowCount + '" type="text" style="text-align:center;" value="item ' + rowCount + '" readonly /></td>' +
+                    '<td class="muted-text"><input type="text" style="text-align:center;" value="1" class="quantity' + rowCount + '" name="quantity' + rowCount + '" onInput="TotalPrice(' + rowCount + ')" /></td>' +
+                    '<td class="muted-text"><input type="text" style="text-align:center;" value="1" class="unitPrice' + rowCount + '" name="unitPrice' + rowCount + '" onInput="TotalPrice(' + rowCount + ')" /></td>' +
+                    '<td class="text-primary"><span class="result' + rowCount + '">0.00</span></td>';
+
+               
+            }
+
+
+        </script>
     <script src="../../assets/plugins/common/common.min.js"></script>
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
     <script src="../js/styleSwitcher.js"></script>
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
         <script src="../js/bill.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </form>
 </body>
 </html>

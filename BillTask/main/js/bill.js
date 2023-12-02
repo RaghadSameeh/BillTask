@@ -5,18 +5,22 @@
     var result = document.querySelector(".result" + id);
     result.innerHTML = Number(input1.value) * Number(input2.value);
     updateTotal();
+    
 }
 
 function updateTotal() {
-    //get price of all elements
-    var result1 = Number(document.querySelector(".result1").innerHTML);
-    var result2 = Number(document.querySelector(".result2").innerHTML);
-    var result3 = Number(document.querySelector(".result3").innerHTML);
+    let total = 0;
+    let table = document.getElementById("tbody");
 
-    //get the total price
-    var total = result1 + result2 + result3;
+    for (let i = 1; i <= table.rows.length; i++) {
+        var result = Number(document.querySelector(".result" + i).innerHTML);
+        total += result;
+    }
+
     document.getElementById('total').innerHTML = total.toFixed(2);
 }
+
+
 
 function deleteSelectedRows() {
     var checkboxes = document.getElementsByClassName('deleteCheckbox');
@@ -37,3 +41,7 @@ function deleteSelectedRows() {
         table.deleteRow(rowsToDelete[j]);
     }
 }
+
+
+
+
