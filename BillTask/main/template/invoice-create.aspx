@@ -792,7 +792,7 @@
         <tr>
             <td><input type="checkbox" /></td>
 <td class="muted-text">
-    <input name="itemName1" type="text" style="text-align:center;" value="item 1" readonly />
+    <input name="itemName1" type="text" style="text-align:center; border:none;" value="item 1" readonly />
 </td>            <td class="muted-text">
                 <input type="text" style="text-align:center;" value="1" class="quantity1" name="quantity1" onInput="TotalPrice(1)" />
             </td>
@@ -804,7 +804,7 @@
         <tr>
             <td><input type="checkbox" /></td>
 <td class="muted-text">
-    <input name="itemName2" type="text" style="text-align:center;" value="item 2" readonly />
+    <input name="itemName2" type="text" style="text-align:center;border:none;" value="item 2" readonly />
 </td>            <td class="muted-text">
                 <input type="text" style="text-align:center;" value="1" class="quantity2" name="quantity2" onInput="TotalPrice(2)" />
             </td>
@@ -816,7 +816,7 @@
         <tr>
             <td><input type="checkbox" /></td>
 <td class="muted-text">
-    <input name="itemName3" type="text" style="text-align:center;" value="item 3" readonly />
+    <input name="itemName3" type="text" style="text-align:center;border:none;" value="item 3" readonly />
 </td>            <td class="muted-text">
                 <input type="text" style="text-align:center;" value="1" class="quantity3" name="quantity3" onInput="TotalPrice(3)" />
             </td>
@@ -1489,7 +1489,7 @@
                 var newRow = table.insertRow();
 
                 newRow.innerHTML = '<td><input type="checkbox" /></td>' +
-                    '<td class="muted-text"><input name="itemName' + rowCount + '" type="text" style="text-align:center;" value="item ' + rowCount + '" readonly /></td>' +
+                    '<td class="muted-text"><input name="itemName' + rowCount + '" type="text" style="text-align:center;border:none;" value="item ' + rowCount + '" readonly /></td>' +
                     '<td class="muted-text"><input type="text" style="text-align:center;" value="1" class="quantity' + rowCount + '" name="quantity' + rowCount + '" onInput="TotalPrice(' + rowCount + ')" /></td>' +
                     '<td class="muted-text"><input type="text" style="text-align:center;" value="1" class="unitPrice' + rowCount + '" name="unitPrice' + rowCount + '" onInput="TotalPrice(' + rowCount + ')" /></td>' +
                     '<td class="text-primary"><span class="result' + rowCount + '">0.00</span></td>';
